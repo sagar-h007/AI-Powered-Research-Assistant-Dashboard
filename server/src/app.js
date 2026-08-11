@@ -33,8 +33,19 @@ app.use('/api/', apiLimiter);
 import authRoutes from './routes/authRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import documentRoutes from './routes/documentRoutes.js';
+import connectDB from './config/db.js';
 
-// Setup Routes (to be added)
+// Ensure DB is connected before handling any API routes (Crucial for Vercel Serverless)
+app.use('/api', async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Setup Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/projects/:projectId/documents', documentRoutes);

@@ -30,7 +30,6 @@ const apiLimiter = rateLimit({
 });
 app.use('/api/', apiLimiter);
 
-import authRoutes from './routes/authRoutes.js';
 import projectRoutes from './routes/projectRoutes.js';
 import documentRoutes from './routes/documentRoutes.js';
 import connectDB from './config/db.js';
@@ -46,7 +45,6 @@ app.use('/api', async (req, res, next) => {
 });
 
 // Setup Routes
-app.use('/api/auth', authRoutes);
 app.use('/api/projects', projectRoutes);
 app.use('/api/projects/:projectId/documents', documentRoutes);
 

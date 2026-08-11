@@ -14,11 +14,11 @@ export const getDocuments = async (req, res, next) => {
   try {
     const { projectId } = req.params;
     
-    // Verify user owns the project
-    const project = await Project.findOne({ _id: projectId, userId: req.user._id });
+    // Verify project exists
+    const project = await Project.findById(projectId);
     if (!project) {
       res.status(404);
-      throw new Error('Project not found or unauthorized');
+      throw new Error('Project not found');
     }
 
     const documents = await Document.find({ projectId }).sort({ createdAt: -1 });
@@ -35,8 +35,8 @@ export const addDocument = async (req, res, next) => {
   try {
     const { projectId } = req.params;
     
-    // Verify project ownership
-    const project = await Project.findOne({ _id: projectId, userId: req.user._id });
+    // Verify project exists
+    const project = await Project.findById(projectId);
     if (!project) {
       res.status(404);
       throw new Error('Project not found');

@@ -1,12 +1,6 @@
 import mongoose from 'mongoose';
 
 const projectSchema = new mongoose.Schema({
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true,
-    index: true, // Crucial for querying projects by user efficiently
-  },
   title: {
     type: String,
     required: [true, 'Project title is required'],

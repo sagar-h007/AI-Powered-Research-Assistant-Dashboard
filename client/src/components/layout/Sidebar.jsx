@@ -2,8 +2,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, 
   FolderKanban, 
-  Settings, 
-  LogOut 
+  Settings
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 
@@ -51,13 +50,7 @@ const Sidebar = () => {
       </nav>
 
       <div className="p-4 border-t border-gray-200 dark:border-dark-border">
-        <button 
-          onClick={logout}
-          className="flex w-full items-center gap-3 px-3 py-2.5 rounded-lg font-medium text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-500/10 transition-colors"
-        >
-          <LogOut className="w-5 h-5" />
-          Logout
-        </button>
+        {/* Footer area reserved for future links */}
       </div>
     </aside>
   );

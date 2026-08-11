@@ -17,12 +17,12 @@ export const getProjects = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 10;
     const skip = (page - 1) * limit;
 
-    const projects = await Project.find({ userId: req.user._id })
+    const projects = await Project.find({})
       .sort({ updatedAt: -1 })
       .skip(skip)
       .limit(limit);
       
-    const total = await Project.countDocuments({ userId: req.user._id });
+    const total = await Project.countDocuments({});
 
     res.status(200).json({
       projects,
@@ -43,7 +43,6 @@ export const createProject = async (req, res, next) => {
     const validatedData = projectSchema.parse(req.body);
 
     const project = await Project.create({
-      userId: req.user._id,
       ...validatedData
     });
 
@@ -62,7 +61,7 @@ export const createProject = async (req, res, next) => {
 // @access  Private
 export const getProjectById = async (req, res, next) => {
   try {
-    const project = await Project.findOne({ _id: req.params.id, userId: req.user._id });
+    const project = await Project.findById(req.params.id);
 
     if (!project) {
       res.status(404);
@@ -82,8 +81,8 @@ export const updateProject = async (req, res, next) => {
   try {
     const validatedData = projectSchema.partial().parse(req.body);
 
-    const project = await Project.findOneAndUpdate(
-      { _id: req.params.id, userId: req.user._id },
+    const project = await Project.findByIdAndUpdate(
+      req.params.id,
       validatedData,
       { new: true, runValidators: true }
     );
@@ -108,7 +107,7 @@ export const updateProject = async (req, res, next) => {
 // @access  Private
 export const deleteProject = async (req, res, next) => {
   try {
-    const project = await Project.findOneAndDelete({ _id: req.params.id, userId: req.user._id });
+    const project = await Project.findByIdAndDelete(req.params.id);
 
     if (!project) {
       res.status(404);

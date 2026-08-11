@@ -37,12 +37,8 @@ const Navbar = () => {
         <div className="h-8 w-px bg-gray-200 dark:bg-dark-border mx-2"></div>
 
         <div className="flex items-center gap-3">
-          <div className="flex flex-col items-end">
-            <span className="text-sm font-medium text-gray-900 dark:text-white leading-none">{user?.name}</span>
-            <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">{user?.email}</span>
-          </div>
           <div className="w-9 h-9 rounded-full bg-primary-100 dark:bg-primary-900/30 border border-primary-200 dark:border-primary-800 flex items-center justify-center text-primary-700 dark:text-primary-400 font-bold">
-            {user?.name?.charAt(0).toUpperCase()}
+            U
           </div>
         </div>
       </div>
